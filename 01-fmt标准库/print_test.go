@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"testing"
 )
 
 type User struct {
 	Id int64
 }
 
-func main() {
+func TestPrint(t *testing.T) {
 	fmt.Println("---------打印结构体----------")
 	user := &User{Id: 1}
 	fmt.Printf("%v\n", user)
@@ -62,7 +63,9 @@ func main() {
 	fmt.Printf("%10.2f\n", 10.14)
 	fmt.Printf("%-10.2f\n", 10.14)
 	fmt.Printf("%010s\n", s)
+}
 
+func TestFprint(t *testing.T) {
 	fmt.Println("-------Fprint 把内容输出到io输出流中----------")
 	fmt.Fprint(os.Stdout, "标准输出打印\n")
 	fmt.Fprintln(os.Stdout, "标准输出打印")
@@ -75,8 +78,9 @@ func main() {
 	}
 	fmt.Fprintf(file, "文件输出打印:%v\n", 10)
 	fmt.Fprintln(file, "文件输出打印")
-	fmt.Println("")
+}
 
+func TestSprint(*testing.T) {
 	fmt.Println("-------Sprint/f/ln字符串拼接-------------------")
 	fmt.Println(fmt.Sprint("10\n"))
 	fmt.Println(fmt.Sprintln("10"))
@@ -86,7 +90,9 @@ func main() {
 	addr := fmt.Sprintf("%s:%d", host, port)
 	addr2 := host + ":" + fmt.Sprint(port)
 	fmt.Println(addr, addr2)
+}
 
+func TestError(*testing.T) {
 	fmt.Println("-------使用Errorf生成错误----------")
 	err1 := errors.New("用户名格式不正确")
 	err2 := fmt.Errorf("用户名格式不正确：%s", "@#￥哈哈")
@@ -96,6 +102,9 @@ func main() {
 		fmt.Printf("%T %[1]v", err1)
 	}
 
+}
+
+func TestScan(t *testing.T) {
 	fmt.Println("------------扫描Scan----------------")
 	var (
 		name    string
@@ -110,5 +119,4 @@ func main() {
 	reader := strings.NewReader("1:zhangsan 2:18 3:true")
 	fmt.Fscanf(reader, "1:%s 2:%d 3:%t", &name, &age, &married)
 	fmt.Printf("name:%s,age:%d,married:%t", name, age, married)
-
 }

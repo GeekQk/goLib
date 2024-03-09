@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"testing"
 	"time"
 )
 
 // 创建文件
-func createFile(fileName string) {
+func TestCreateFile(t *testing.T) {
+	fileName := "test.txt"
 	f, err := os.Create(fileName)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
@@ -18,7 +20,7 @@ func createFile(fileName string) {
 }
 
 // 创建文件夹
-func mkdir() {
+func TestMkdir(t *testing.T) {
 	err := os.Mkdir("ms", os.ModePerm)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
@@ -27,34 +29,34 @@ func mkdir() {
 	// fmt.Printf("pe: %v\n", pe)
 }
 
-func mkdirAll() {
+func TestMkdirAll(t *testing.T) {
 	err := os.MkdirAll("ms/one/two", os.ModePerm)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
 
-func removeFile() {
+func TestRemoveFile(t *testing.T) {
 	err := os.Remove("test.txt")
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
-func removeDir() {
+func TestRemoveDir(t *testing.T) {
 	err := os.Remove("ms/one")
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
 
-func removeAllDir() {
+func TestRemoveAllDir(t *testing.T) {
 	err := os.RemoveAll("ms")
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
 
-func getWd() {
+func TestGetWd(t *testing.T) {
 	dir, err := os.Getwd()
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
@@ -63,7 +65,7 @@ func getWd() {
 	}
 }
 
-func chDir() {
+func TestChDir(t *testing.T) {
 	err := os.Chdir("/www/code")
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
@@ -71,39 +73,39 @@ func chDir() {
 	fmt.Println(os.Getwd())
 }
 
-func tempDir() {
+func TestTempDir(t *testing.T) {
 	s := os.TempDir()
 	fmt.Printf("s: %v\n", s)
 }
 
-func renameFile() {
+func TestRenameFile(t *testing.T) {
 	err := os.Rename("test.txt", "test2.txt")
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
-func renameDir() {
+func TestRenameDir(t *testing.T) {
 	err := os.Rename("ms", "ms1")
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
 
-func chmod() {
+func TestChmod(t *testing.T) {
 	err := os.Chmod("./texg.go", 0666)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
 
-func chown() {
+func TestChown(t *testing.T) {
 	err := os.Chown("test23.txt", 10, 10)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
 	}
 }
 
-func openClose() {
+func TestOpenClose(t *testing.T) {
 	f, err := os.OpenFile("test2.txt", os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		panic(err)
@@ -113,7 +115,7 @@ func openClose() {
 
 }
 
-func fileStat() {
+func TestFileStat(t *testing.T) {
 	f, err := os.OpenFile("test2.txt", os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		panic(err)
@@ -126,7 +128,7 @@ func fileStat() {
 	fmt.Printf("file info : %#v", fileInfo)
 }
 
-func fileRead() {
+func TestFileRead(t *testing.T) {
 	f, err := os.OpenFile("./test.txgt", os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		panic(err)
@@ -146,7 +148,7 @@ func fileRead() {
 	fmt.Printf("内容：%s \n", body)
 }
 
-func fileReadAt() {
+func TestFileReadAt(t *testing.T) {
 	f, err := os.OpenFile("test2.txt", os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		panic(err)
@@ -157,7 +159,7 @@ func fileReadAt() {
 	fmt.Printf("read content:%s \n", buf[:n])
 }
 
-func fileReadDir() {
+func TestFileReadDir(t *testing.T) {
 	f, err := os.Open("/www/")
 	if err != nil {
 		panic(err)
@@ -174,7 +176,7 @@ func fileReadDir() {
 	}
 }
 
-func fileSeek() {
+func TestFileSeek(t *testing.T) {
 	f, err := os.OpenFile("test2.txt", os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		panic(err)
@@ -185,7 +187,7 @@ func fileSeek() {
 	n, _ := f.Read(buf)
 	fmt.Printf("读取内容:%s\n", buf[:n])
 }
-func fileWrite() {
+func TestFileWrite(t *testing.T) {
 	f, err := os.OpenFile("test2.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
 	if err != nil {
 		panic(err)
@@ -195,7 +197,7 @@ func fileWrite() {
 	f.WriteString("hello golang~\n")
 }
 
-func fileWriteAt() {
+func TestFileWriteAt(t *testing.T) {
 	f, err := os.OpenFile("test2.txt", os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		panic(err)
@@ -207,7 +209,7 @@ func fileWriteAt() {
 	}
 }
 
-func osInfo() {
+func TestOsInfo(t *testing.T) {
 	// 获得当前正在运行的进程id
 	fmt.Println("---------")
 	fmt.Printf("os.Getpid(): %v\n", os.Getpid())
@@ -244,66 +246,4 @@ func osInfo() {
 	// 等待进程p的退出，返回进程状态
 	ps, _ := p.Wait()
 	fmt.Println(ps.String())
-}
-
-func main() {
-	/*
-		// 创建文件 默认使用666权限
-		createFile("test.txt")
-		//创建单级文件目录
-		mkdir()
-		//多级文件目录
-		mkdirAll()
-		//删除文件
-		removeFile()
-		//删除文件夹
-		removeDir()
-		//删除多级文件夹
-		removeAllDir()
-		//获取当前工作目录
-		getWd()
-		//修改工作目录
-		// chDir()
-		//获取临时目录地址
-		tempDir()
-		//文件改名
-		renameFile()
-		//文件夹改名
-		renameDir()
-		//文件修改权限
-		chmod()
-		//修改文件所有者权限
-		chown()
-	*/
-
-	/*
-		//文件打开和读取
-		// O_RDONLY int = syscall.O_RDONLY // 只读模式打开文件
-		// O_WRONLY int = syscall.O_WRONLY // 只写模式打开文件
-		// O_RDWR   int = syscall.O_RDWR   // 读写模式打开文件
-		// O_APPEND int = syscall.O_APPEND // 写操作时将数据附加到文件尾部
-		// O_CREATE int = syscall.O_CREAT  // 如果不存在将创建一个新文件
-		// O_EXCL   int = syscall.O_EXCL   // 和O_CREATE配合使用，文件必须不存在
-		// O_SYNC   int = syscall.O_SYNC   // 打开文件用于同步I/O
-		// O_TRUNC  int = syscall.O_TRUNC  // 如果可能，打开时清空文件
-
-		// 打开文件
-		openClose()
-		//文件状态
-		fileStat()
-		//文件读取
-		fileRead()
-		//文件从哪里开始读
-		// fileReadAt()
-		//打开目录
-		fileReadDir()
-		//文件内容偏移
-		fileSeek()
-		//文件写
-		fileWrite()
-		//文件偏移位置写,但是会把重合位置字符替换掉
-		fileWriteAt()
-	*/
-	osInfo()
-
 }
