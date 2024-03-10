@@ -45,14 +45,14 @@ func SomeFunction(param string) *Response {
 
 func main() {
 	// 调用接口
-	resp := SomeFunction("errors")
+	resp := SomeFunction("error")
 
 	// 处理响应
 	if resp.Code == 0 {
 		// 处理成功的情况
-		fmt.Println("Success:", resp.Code, resp.Msg, resp.Data)
+		fmt.Printf("succ respose:%+v\n", resp)
 	} else {
 		// 处理错误的情况
-		fmt.Println("Error:", resp.Code, resp.Msg, resp.Data)
+		fmt.Printf("err respose:%+v\n", resp)
 	}
 }
