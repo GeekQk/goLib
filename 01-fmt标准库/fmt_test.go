@@ -80,6 +80,7 @@ func TestFprint(t *testing.T) {
 	fmt.Fprintln(file, "文件输出打印")
 }
 
+
 func TestSprint(*testing.T) {
 	fmt.Println("-------Sprint/f/ln字符串拼接-------------------")
 	fmt.Println(fmt.Sprint("10\n"))
@@ -91,6 +92,7 @@ func TestSprint(*testing.T) {
 	addr2 := host + ":" + fmt.Sprint(port)
 	fmt.Println(addr, addr2)
 }
+
 
 func TestError(*testing.T) {
 	fmt.Println("-------使用Errorf生成错误----------")
