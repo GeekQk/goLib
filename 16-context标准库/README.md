@@ -130,18 +130,17 @@ import (
 )
 
 func main() {
- type favContextKey string
- f := func(ctx context.Context, k favContextKey) {
+ f := func(ctx context.Context, k string) {
   if v := ctx.Value(k); v != nil {
    fmt.Println("found value:", v)
    return 
   }
   fmt.Println("key not found:", k)
  }
- key1 := favContextKey("key1")
+ key1 := "key1"
  ctx := context.WithValue(context.Background(), key1, "Golang")
  f(ctx, key1)
- f(ctx, favContextKey("key2"))
+ f(ctx, "key2")
 }
 ~~~
 
